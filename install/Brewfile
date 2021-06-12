@@ -1,6 +1,8 @@
 tap "homebrew/bundle"
+tap "d12frosted/emacs-plus"
 
 brew "coreutils"
+brew "emacs-plus
 brew "stow"
 brew "ffmpeg"
 brew "gnu-sed"
