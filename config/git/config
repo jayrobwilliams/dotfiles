@@ -8,29 +8,7 @@
 [core]
 	excludesfile = ~/.config/git/ignore
 	editor = emacs
-#	filemode = false
-#	trustctime = false
-#	autocrlf = input
-#	untrackedCache = true
-#	pager = diff-so-fancy | less --tabs=4 -RFX
-# 	ignorecase = false
-# 
-# [credential]
-# 	helper = osxkeychain
-# 
-# [grep]
-# 	lineNumber = true
-# 
-# [help]
-# 	autocorrect = 1
-# 
-# [push]
-# 	default = simple
-# 	followTags = true
-# 
-# [fetch]
-# 	prune = true
-# 
+
 # [alias]
 # 	amend = commit --amend --reuse-message=HEAD
 # 	br = branch
@@ -54,51 +32,8 @@
 # 	stl = ls-files -m -o --exclude-standard
 # 	sts = status -sb
 # 	unstage = reset --hard HEAD
-# 
-# [diff]
-# 	renames = copies
-# 	indentHeuristic = true
-# 	tool = Kaleidoscope
-# [difftool]
-# 	prompt = false
-# [difftool "Kaleidoscope"]
-# 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-# [difftool "sourcetree"]
-# 	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
-# 	path = 
-# 
-# [merge]
-# 	tool = Kaleidoscope
-# 	conflictstyle = diff3
-# 	defaultToUpstream = true
-# [mergetool]
-# 	prompt = false
-# [mergetool "Kaleidoscope"]
-# 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-# 	trustExitCode = true
-# [mergetool "sourcetree"]
-# 	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-# 	trustExitCode = true
-# 
-# [color]
-# 	ui = auto
-# [color "branch"]
-# 	current = yellow reverse
-# 	local = yellow
-# 	remote = green
-# [color "diff"]
-# 	meta = yellow bold
-# 	frag = magenta bold
-# 	old = red bold
-# 	new = green bold
-# [color "status"]
-# 	added = yellow
-# 	changed = green
-# 	untracked = cyan
-# [color "diff-highlight"]
-# 	oldNormal = red bold
-# 	oldHighlight = red bold 52
-# 	newNormal = green bold
-# 	newHighlight = green bold 22
-# [pull]
-# 	rebase = true
+[merge]
+	ff = false
+
+[pull]
+	rebase = true
