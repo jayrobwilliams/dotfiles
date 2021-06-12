@@ -1,0 +1,38 @@
+{
+    "save_workspace": "never",
+    "load_workspace": false,
+    "initial_working_directory": "~",
+    "posix_terminal_shell": "bash",
+    "jobs_tab_visibility": "shown",
+    "soft_wrap_r_files": true,
+    "continue_comments_on_newline": true,
+    "panes": {
+        "quadrants": [
+            "Source",
+            "Console",
+            "TabSet1",
+            "TabSet2"
+        ],
+        "tabSet1": [
+            "Environment",
+            "History",
+            "Connections",
+            "Build",
+            "VCS",
+            "Tutorial",
+            "Presentation"
+        ],
+        "tabSet2": [
+            "Files",
+            "Plots",
+            "Packages",
+            "Help",
+            "Viewer"
+        ],
+        "hiddenTabSet": [],
+        "console_left_on_top": false,
+        "console_right_on_top": true,
+        "additional_source_columns": 0
+    },
+    "default_sweave_engine": "knitr"
+}
