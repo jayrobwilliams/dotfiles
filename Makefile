@@ -2,12 +2,9 @@ SHELL = /bin/bash
 DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 OS := $(shell bin/is-supported bin/is-macos macos linux)
 PATH := $(DOTFILES_DIR)/bin:$(PATH)
-NVM_DIR := $(HOME)/.nvm
 export XDG_CONFIG_HOME = $(HOME)/.config
 export STOW_DIR = $(DOTFILES_DIR)
 export ACCEPT_EULA=Y
-
-.PHONY: test
 
 all: $(OS)
 
@@ -15,7 +12,7 @@ macos: sudo core-macos packages link
 
 linux: core-linux link
 
-core-macos: brew bash git npm ruby
+core-macos: brew bash git ruby
 
 core-linux:
 	apt-get update
@@ -34,7 +31,7 @@ ifndef GITHUB_ACTION
 	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 endif
 
-packages: brew-packages cask-apps node-packages
+packages: brew-packages cask-apps r-packages
 
 link: stow-$(OS)
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then \
@@ -72,10 +69,6 @@ endif
 git: brew
 	brew install git git-extras
 
-npm:
-	if ! [ -d $(NVM_DIR)/.git ]; then git clone https://github.com/creationix/nvm.git $(NVM_DIR); fi
-	. $(NVM_DIR)/nvm.sh; nvm install --lts
-
 ruby: brew
 	brew install ruby
 
@@ -84,12 +77,7 @@ brew-packages: brew
 
 cask-apps: brew
 	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile || true
-	defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
-	for EXT in $$(cat install/Codefile); do code --install-extension $$EXT; done
 	xattr -d -r com.apple.quarantine ~/Library/QuickLook
 
-node-packages: npm
-	. $(NVM_DIR)/nvm.sh; npm install -g $(shell cat install/npmfile)
-
-test:
-	. $(NVM_DIR)/nvm.sh; bats test
+r-packages: brew-packages
+	Rscript $(DOTFILES_DIR)/install/packages.R
