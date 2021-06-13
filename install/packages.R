@@ -4,7 +4,7 @@ packages <- c('acled.api', 'arm', 'brms', 'caret', 'covr', 'cowplot',
               'ggridges', 'ggthemes', 'glmnet', 'gridExtra', 'haven',
               'knitr', 'latex2exp', 'lme4', 'lwgeom', 'magick',
               'meltt', 'microbenchmark', 'modelsummary', 'ranger', 'rgeos',
-              'rgdal', 'rio', 'rpart', 'rstan', 'RWmisc', 'testthat',
+              'rgdal', 'rio', 'rJava', 'rpart', 'rstan', 'RWmisc', 'testthat',
               'texreg', 'WDI', 'tidyverse', 'xtable')
 
 ## check if any required packages not present
