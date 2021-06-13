@@ -3,23 +3,29 @@ tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 
+# research software
 cask "r"
 cask "rstudio"
 cask "miniconda"
-cask "dropbox"
-cask "docker"
-cask "google-chrome"
-cask "slack"
-cask "zoom"
-cask "vlc"
-cask "pdf-expert"
 cask "mactex"
 cask "texstudio"
 cask "zotero"
-cask "openvpn-connect"
-cask "stats"
+cask "docker"
 
-# Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
+# productivity
+cask "dropbox"
+cask "slack"
+cask "zoom"
+cask "pdf-expert"
+cask "openvpn-connect"
+
+# quality of life
+cask "google-chrome"
+cask "font-source-code-pro"
+cask "stats"
+cask "vlc"
+
+# quick look plugins (https://github.com/sindresorhus/quick-look-plugins)
 cask "qlcolorcode"
 cask "qlstephen"
 cask "qlmarkdown"
