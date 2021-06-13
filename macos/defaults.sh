@@ -54,22 +54,55 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # Trackpad, mouse, Bluetooth accessories                                      #
 ###############################################################################
 
-# "Normal" scrolling
+# Disable "natural" scrolling
 defaults write -g com.apple.swipescrolldirection -bool false
 
-# Trackpad: enable tap to click for this user and for the login screen
+# Enable tap to click for this user and for the login screen
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-# Trackpad: swipe between pages with three fingers
-defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerHorizSwipeGesture -int 1
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 1
+# Two finger right click
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
+
+# Swipe between spaces
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerHorizSwipeGesture -int 2
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -bool false
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -bool false
+
+# Three finger drag
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
 
 # Increase sound quality for Bluetooth headphones/headsets
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+###############################################################################
+# Energy saving                                                               #
+###############################################################################
+
+# Sleep the display after 3 minutes while on battery
+sudo pmset -b displaysleep 3
+
+# Sleep after 5 minutes while on battery
+sudo pmset -b disksleep 5
+sudo pmset -b sleep 5
+
+# Sleep the display after 5 minutes while charging
+sudo pmset -c displaysleep 5
+
+# Sleep after 10 minutes while charging
+sudo pmset -c disksleep 10
+sudo pmset -c sleep 10
+
+# Disable machine sleep while charging
+sudo pmset -c sleep 0
+
+# Set machine sleep to 5 minutes on battery
+sudo pmset -b sleep 5
 
 ###############################################################################
 # Screen                                                                      #
@@ -118,8 +151,10 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # Use AirDrop over every interface.
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
-# Always open everything in Finder's list view.
-# Use list view in all Finder windows by default
+# Show the ~/Library folder
+chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+
+# Use column view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
@@ -225,6 +260,13 @@ defaults write com.apple.terminal StringEncodings -array 4
 defaults write com.apple.Terminal ShowLineMarks -int 0
 
 ###############################################################################
+# Time Machine                                                                #
+###############################################################################
+
+# Prevent Time Machine from prompting to use new hard drives as backup volume
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
 
@@ -269,6 +311,13 @@ defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 
 # Download newly available updates in background
 defaults write com.apple.SoftwareUpdate AutomaticDownload -bool true
+
+###############################################################################
+# Messages                                                                    #
+###############################################################################
+
+# Disable automatic emoji substitution (i.e. use plain text smileys)
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
 
 ###############################################################################
 # Kill affected applications                                                  #
