@@ -1,5 +1,8 @@
 COMPUTER_NAME="MBP"
 
+# set current homebrew bash as login shell
+chsh -s /usr/local/bin/bash
+
 osascript -e 'tell application "System Preferences" to quit'
 
 # Ask for the administrator password upfront
