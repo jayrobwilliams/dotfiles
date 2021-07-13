@@ -16,6 +16,7 @@ cask "adoptopenjdk"
 
 # productivity
 cask "dropbox"
+cask "thunderbird"
 cask "slack"
 cask "zoom"
 cask "pdf-expert"
