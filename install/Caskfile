@@ -20,7 +20,6 @@ cask "thunderbird"
 cask "slack"
 cask "zoom"
 cask "pdf-expert"
-cask "openvpn-connect"
 
 # quality of life
 cask "google-chrome"
