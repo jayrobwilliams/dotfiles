@@ -12,9 +12,20 @@
 
 ;; add MELPA
 (require 'package)
-(add-to-list 'package-archives
-             '("MELPA Stable" . "https://stable.melpa.org/packages/") t)
+;;(add-to-list 'package-archives
+;;             '("MELPA Stable" . "https://stable.melpa.org/packages/") t)
+(setq package-archives
+      '(("GNU ELPA"     . "https://elpa.gnu.org/packages/")
+	("MELPA Stable" . "https://stable.melpa.org/packages/")
+        ("MELPA"        . "https://melpa.org/packages/"))
+      package-archive-priorities
+      '(("MELPA Stable" . 10)
+        ("GNU ELPA"     . 5)
+        ("MELPA"        . 0)))
 (package-initialize)
+
+(eval-when-compile
+  (require 'use-package))
 
 ;; install flycheck
 (use-package flycheck
@@ -53,5 +64,3 @@
   :config
   (load-theme 'sanityinc-tomorrow-day t)
   )
-
-;;(load-theme 'sanityinc-tomorrow-day t)
