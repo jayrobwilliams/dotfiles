@@ -23,7 +23,7 @@ PATH="$DOTFILES_DIR/bin:$PATH"
 
 # Source the dotfiles (order matters)
 
-for DOTFILE in "$DOTFILES_DIR"/system/.{function,function_*,path,env,alias,grep,prompt,nvm,completion,fix,custom}; do
+for DOTFILE in "$DOTFILES_DIR"/system/.{function,function_*,path,env,alias,grep,prompt,completion,fix,custom}; do
   [ -f "$DOTFILE" ] && . "$DOTFILE"
 done
 
@@ -54,7 +54,7 @@ unset READLINK CURRENT_SCRIPT SCRIPT_PATH DOTFILE EXTRAFILE
 # Export
 
 export DOTFILES_DIR DOTFILES_EXTRA_DIR
-
+ 
 # Bash completion
 
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
@@ -67,6 +67,9 @@ PATH="/Library/TeX/texbin:$PATH"
 
 # Don't save R workspace
 alias R="R --no-save"
+
+# Change directory on exiting ranger
+source $HOME/.config/ranger/shell_automatic_cd.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
