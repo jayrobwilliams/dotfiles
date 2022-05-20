@@ -23,6 +23,10 @@ alias lp="stat -c '%a %n' *"
 
 unset LS_COLORS LS_TIMESTYLEISO LS_GROUPDIRSFIRST
 
+# Colored diff output by default
+
+alias diff="colordiff"
+
 # Network
 
 alias ip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
