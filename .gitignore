@@ -1,1 +1,5 @@
 system/.custom
+*.lock.json
+
+# Emacs subdirs
+config/emacs/*/
