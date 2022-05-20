@@ -2,6 +2,7 @@ SHELL = /bin/bash
 DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 OS := $(shell bin/is-supported bin/is-macos macos linux)
 PATH := $(DOTFILES_DIR)/bin:$(PATH)
+HOMEBREW_PREFIX := $(shell bin/is-supported bin/is-arm64 /opt/homebrew /usr/local)
 export XDG_CONFIG_HOME = $(HOME)/.config
 export STOW_DIR = $(DOTFILES_DIR)
 export ACCEPT_EULA=Y
@@ -12,7 +13,7 @@ macos: sudo core-macos packages link
 
 linux: core-linux link
 
-core-macos: brew bash git ruby
+core-macos: brew bash git
 
 core-linux:
 	apt-get update
@@ -49,7 +50,7 @@ unlink: stow-$(OS)
 brew:
 	is-executable brew || curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash
 
-bash: BASH=/usr/local/bin/bash
+bash: BASH=$(HOMEBREW_PREFIX)/bin/bash
 bash: SHELLS=/private/etc/shells
 bash: brew
 ifdef GITHUB_ACTION
@@ -69,15 +70,11 @@ endif
 git: brew
 	brew install git git-extras
 
-ruby: brew
-	brew install ruby
-
-brew-packages: brew
+brew-packages: brew || true
 	brew bundle --file=$(DOTFILES_DIR)/install/Brewfile
-	brew pin geos gdal proj
 
-cask-apps: brew
-	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile || true
+cask-apps: brew || true
+	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile
 	xattr -d -r com.apple.quarantine ~/Library/QuickLook
 
 r-packages: brew-packages
