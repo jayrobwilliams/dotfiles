@@ -49,12 +49,13 @@ _bash_prompt_config() {
   local WHITE_BOLD="${ESC_OPEN}${BOLD}$(_setaf 7)${ESC_CLOSE}"
 
   # Expose the variables we need in prompt command
-  P_USER=${BRIGHT_GREEN}${USER_SYMBOL}
-  P_HOST=${CYAN}${HOST_SYMBOL}
+  P_USER=${USER_SYMBOL}
+  P_HOST=${HOST_SYMBOL}
   P_WHITE=${WHITE}
-  P_GREEN=${BRIGHT_GREEN}
-  P_YELLOW=${YELLOW}
+  P_GREEN=${GREEN_BOLD}
+  P_BLUE=${BLUE_BOLD}
   P_RED=${RED}
+  P_VIOLET=${VIOLET}
   P_RESET=${RESET}
 
 }
@@ -63,7 +64,7 @@ bash_prompt_command() {
 
   local EXIT_CODE=$?
   local P_EXIT=""
-  local MAXLENGTH=35
+  local MAXLENGTH=30
   local TRUNC_SYMBOL=".."
   local DIR=${PWD##*/}
   local P_PWD=${PWD/#$HOME/\~}
@@ -82,20 +83,19 @@ bash_prompt_command() {
     echo -ne "\033]0;${P_PWD}\007"
   fi
 
+  # set git-prompt behavior
+  GIT_PS1_SHOWDIRTYSTATE=1
+  GIT_PS1_SHOWSTASHSTATE=1
+  GIT_PS1_SHOWUPSTREAM="auto"
+
   # Parse Git branch name
-  P_GIT=$(parse_git_branch)
+  P_GIT=$(__git_ps1 " [%s $(get_sha)]")
 
-  # Exit code
-  if [[ $EXIT_CODE != 0 ]]; then
-    P_EXIT+="${P_RED}✘ "
-  fi
-
-  PS1="${P_EXIT}${P_USER}${P_WHITE}@${P_HOST} ${P_YELLOW}${P_PWD}${P_GREEN}${P_GIT}${P_YELLOW} ❯ ${P_RESET}"
+  PS1="${P_GREEN}${P_USER}@${P_HOST}${P_RESET}:${P_BLUE}${P_PWD}${P_RESET}${P_VIOLET}${P_GIT}${P_RESET}\$ "
 }
 
-parse_git_branch() {
-  local OUT=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
-  if [ "$OUT" != "" ]; then echo " $OUT"; fi
+get_sha() {
+    git rev-parse --short HEAD 2>/dev/null
 }
 
 _bash_prompt_config
