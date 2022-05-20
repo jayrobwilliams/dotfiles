@@ -43,7 +43,7 @@
  '(custom-safe-themes
    '("bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default))
  '(package-selected-packages
-   '(color-theme-sanityinc-tomorrow rainbow-delimiters lsp-mode treemacs-tab-bar treemacs-persp treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil winum pfuture treemacs flycheck use-package)))
+   '(transpose-frame color-theme-sanityinc-tomorrow rainbow-delimiters lsp-mode treemacs-tab-bar treemacs-persp treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil winum pfuture treemacs flycheck use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -63,4 +63,9 @@
   (setq color-theme-sanityinc-tomorrow t)
   :config
   (load-theme 'sanityinc-tomorrow-day t)
+  )
+
+;; transpose frame
+(use-package transpose-frame
+  :ensure t
   )
