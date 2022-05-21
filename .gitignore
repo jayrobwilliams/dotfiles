@@ -3,3 +3,6 @@ system/.custom
 
 # Emacs subdirs
 config/emacs/*/
+
+# texstudio subdirs
+config/texstudio/*/
