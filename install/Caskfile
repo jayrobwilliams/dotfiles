@@ -22,6 +22,7 @@ cask "zoom"
 cask "pdf-expert"
 
 # quality of life
+cask "kitty"
 cask "google-chrome"
 cask "font-source-code-pro"
 cask "stats"
@@ -32,4 +33,3 @@ cask "qlcolorcode"
 cask "qlstephen"
 cask "qlmarkdown"
 cask "quicklook-json"
-cask "qlvideo"
