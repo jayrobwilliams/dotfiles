@@ -2,29 +2,26 @@
 
 These are my dotfiles. Take anything you want, but at your own risk.
 
+They are largely adapted from https://github.com/webpro/dotfiles with many of the web development components swapped out for more data science-oriented ones.
+
 It mainly targets macOS systems, but it works on at least Ubuntu as well.
 
 ## Highlights
 
 - Minimal efforts to install everything, using a [Makefile](./Makefile)
 - Mostly based around Homebrew, Caskroom and Node.js, latest Bash + GNU Utils
-- Great [Window management](./config/hammerspoon/README.md) (using Hammerspoon)
-- Fast and colored prompt
+- Fast and colored prompt, including git repo and conda environment information
 - Updated macOS defaults
 - Well-organized and easy to customize
-- The installation and runcom setup is
-  [tested weekly on real Ubuntu and macOS machines](https://github.com/webpro/dotfiles/actions) using
-  [a GitHub Action](./.github/workflows/ci.yml)
+- Supports both Apple Silicon (M1) and Intel chips
 
 ## Packages Overview
 
 - [Homebrew](https://brew.sh) (packages: [Brewfile](./install/Brewfile))
 - [homebrew-cask](https://github.com/Homebrew/homebrew-cask) (packages: [Caskfile](./install/Caskfile))
-- [Node.js + npm LTS](https://nodejs.org/en/download/) (packages: [npmfile](./install/npmfile))
-- Latest Git, Bash 4, Python 3, GNU coreutils, curl, Ruby
-- [Hammerspoon](https://www.hammerspoon.org) (config: [keybindings & window management](./config/hammerspoon))
-- [Mackup](https://github.com/lra/mackup) (sync application settings)
-- `$EDITOR` (and Git editor) is [GNU nano](https://www.nano-editor.org)
+- Latest Git, Bash, Python 3, GNU coreutils, curl
+- Mamba (Conda) installed from [miniforge](https://github.com/conda-forge/miniforge#mambaforge)
+- `$EDITOR` (and Git editor) is [GNU Emacs](https://www.gnu.org/software/emacs)
 
 ## Installation
 

@@ -7,7 +7,6 @@ tap "adoptopenjdk/openjdk"
 # research software
 cask "r"
 cask "rstudio"
-cask "miniconda"
 cask "mactex"
 cask "texstudio"
 cask "zotero"

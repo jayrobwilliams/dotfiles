@@ -13,7 +13,7 @@ macos: sudo core-macos packages link
 
 linux: core-linux link
 
-core-macos: brew bash git
+core-macos: brew bash git conda
 
 core-linux:
 	apt-get update
@@ -70,11 +70,14 @@ endif
 git: brew
 	brew install git git-extras
 
-brew-packages: brew || true
-	brew bundle --file=$(DOTFILES_DIR)/install/Brewfile
+conda: brew
+	brew install --cask mambaforge && conda init || true
 
-cask-apps: brew || true
-	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile
+brew-packages: brew
+	brew bundle --file=$(DOTFILES_DIR)/install/Brewfile || true
+
+cask-apps: brew
+	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile || true
 	xattr -d -r com.apple.quarantine ~/Library/QuickLook
 
 r-packages: brew-packages
