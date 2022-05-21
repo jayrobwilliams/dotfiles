@@ -88,10 +88,13 @@ bash_prompt_command() {
   GIT_PS1_SHOWSTASHSTATE=1
   GIT_PS1_SHOWUPSTREAM="auto"
 
+  # Get conda environment
+  P_CONDA=$CONDA_PROMPT_MODIFIER
+
   # Parse Git branch name
   P_GIT=$(__git_ps1 " [%s $(get_sha)]")
 
-  PS1="${P_GREEN}${P_USER}@${P_HOST}${P_RESET}:${P_BLUE}${P_PWD}${P_RESET}${P_VIOLET}${P_GIT}${P_RESET}\$ "
+  PS1="${P_CONDA}${P_GREEN}${P_USER}@${P_HOST}${P_RESET}:${P_BLUE}${P_PWD}${P_RESET}${P_VIOLET}${P_GIT}${P_RESET}\$ "
 }
 
 get_sha() {
