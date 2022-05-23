@@ -1,16 +1,21 @@
-;;; emacs config file
+;;; emacs config
 
-;; Line and column numbers
+;;display column numbers
 (column-number-mode)
+
+;; enable line numbers globally
 (global-display-line-numbers-mode t)
 
-;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-                term-mode-hook
-                eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+;; disable line numbers in specific modes
+(add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode -1)))
 
-;; add MELPA
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(scroll-bar-mode 0)
+
+(global-auto-revert-mode 1)
+
+;; add MELPA stable, GNU ELPA, and MELPA
 (require 'package)
 ;;(add-to-list 'package-archives
 ;;             '("MELPA Stable" . "https://stable.melpa.org/packages/") t)
@@ -32,40 +37,75 @@
   :ensure t
   :init (global-flycheck-mode))
 
-;; enable flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(sanityinc-tomorrow-day))
- '(custom-safe-themes
-   '("bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default))
- '(package-selected-packages
-   '(transpose-frame color-theme-sanityinc-tomorrow rainbow-delimiters lsp-mode treemacs-tab-bar treemacs-persp treemacs-magit treemacs-icons-dired treemacs-projectile treemacs-evil winum pfuture treemacs flycheck use-package)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
 ;; Rainbow delimiters
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
-;; Tomorrow theme
-(use-package color-theme-sanityinc-tomorrow
+(use-package all-the-icons
   :ensure t
-  :load-path "themes"
-  :init
-  (setq color-theme-sanityinc-tomorrow t)
-  :config
-  (load-theme 'sanityinc-tomorrow-day t)
+  :if (display-graphic-p))
+
+(use-package csv-mode
+  :ensure t
+  :mode "\\.csv\\'")
+
+(use-package xclip
+  :ensure t
+  :defer)
+(xclip-mode 1)
+
+(use-package ace-window
+  :ensure t
+  :commands 'ace-window
+  :bind ("M-o" . ace-window)
   )
 
-;; transpose frame
-(use-package transpose-frame
-  :ensure t
+(defun load-only-theme ()
+  "Disable all themes and then load a single theme interactively."
+  (interactive)
+  (while custom-enabled-themes
+    (disable-theme (car custom-enabled-themes)))
+  (call-interactively 'load-theme))
+
+;; use centaur tabs and base16 tomorrow in GUI (colors wrong in terminal)
+(when (display-graphic-p)
+    (use-package centaur-tabs
+      :demand
+      :config
+      (setq centaur-tabs-style "bar"
+	  centaur-tabs-height 32
+	  centaur-tabs-set-icons t
+	  centaur-tabs-set-modified-marker t
+	  centaur-tabs-show-navigation-buttons t
+	  centaur-tabs-set-bar 'under
+	  x-underline-at-descent-line t)
+      (centaur-tabs-headline-match)
+      ;; (setq centaur-tabs-gray-out-icons 'buffer)
+      ;; (centaur-tabs-enable-buffer-reordering)
+      ;; (setq centaur-tabs-adjust-buffer-order t)
+      (centaur-tabs-mode t)
+      :bind
+      ("C-<prior>" . centaur-tabs-backward)
+      ("C-<next>" . centaur-tabs-forward))
+    (use-package base16-theme
+      :ensure t
+      :config
+      (load-theme 'base16-tomorrow t))
   )
+
+;; use window tab line and doom themes tomorrow in terminal (colors wrong w/ centaur tabs)
+(unless (display-graphic-p)
+    (use-package doom-themes
+      :ensure t
+      :config
+      (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+            doom-themes-enable-italic t) ; if nil, italics is universally disabled
+      (load-theme 'doom-tomorrow-day t))
+    (global-tab-line-mode t)(setq tab-line-new-button-show nil)  ;; do not show add-new button
+    (setq tab-line-close-button-show nil)  ;; do not show close button
+    (setq tab-line-separator "")
+    )
+
+(require 'treemacs-all-the-icons)
+(treemacs-load-theme "all-the-icons")
+
