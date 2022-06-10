@@ -6,13 +6,23 @@
 ;; enable line numbers globally
 (global-display-line-numbers-mode t)
 
-;; disable line numbers in specific modes
-(add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode -1)))
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                eshell-mode-hook
+		treemacs-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+;; add 80 character column indicator
+(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode
+	  (setq-default fill-column 80))
+
+;; don't display bars
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; auto reload changes from disk
 (global-auto-revert-mode 1)
 
 ;; add MELPA stable, GNU ELPA, and MELPA
@@ -108,4 +118,3 @@
 
 (require 'treemacs-all-the-icons)
 (treemacs-load-theme "all-the-icons")
-
