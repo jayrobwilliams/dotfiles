@@ -22,6 +22,11 @@
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 
+(use-package doom-modeline
+  :ensure t
+  :init (setq doom-modeline-bar-width 2)
+  :hook (after-init . doom-modeline-mode))
+
 ;; auto reload changes from disk
 (global-auto-revert-mode 1)
 
@@ -49,6 +54,7 @@
 
 ;; Rainbow delimiters
 (use-package rainbow-delimiters
+  :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package all-the-icons
@@ -70,6 +76,34 @@
   :bind ("M-o" . ace-window)
   )
 
+;; project management
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("s-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map)))
+
+;; git integration
+(use-package git-gutter
+  :ensure t
+  :hook (prog-mode . git-gutter-mode)
+  :config
+  (setq git-gutter:update-interval 0.02)
+  )
+
+(when (display-graphic-p)
+  (use-package git-gutter-fringe
+    :ensure t
+    :config
+    (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+    (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+    (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom)
+    )
+)
+
+;; themes
 (defun load-only-theme ()
   "Disable all themes and then load a single theme interactively."
   (interactive)
@@ -90,6 +124,7 @@
 	  centaur-tabs-set-bar 'under
 	  x-underline-at-descent-line t)
       (centaur-tabs-headline-match)
+      (centaur-tabs-group-by-projectile-project)
       ;; (setq centaur-tabs-gray-out-icons 'buffer)
       ;; (centaur-tabs-enable-buffer-reordering)
       ;; (setq centaur-tabs-adjust-buffer-order t)
