@@ -2,21 +2,14 @@ tap "homebrew/cask"
 tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
-tap "adoptopenjdk/openjdk"
 
 # research software
-cask "r"
-cask "rstudio"
-cask "mactex"
-cask "texstudio"
+#cask "r"
+#cask "rstudio"
 cask "zotero"
-cask "docker"
-cask "adoptopenjdk"
 
 # productivity
 cask "dropbox"
-cask "thunderbird"
-cask "slack"
 cask "zoom"
 cask "pdf-expert"
 

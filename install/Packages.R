@@ -20,7 +20,7 @@ if (length(setdiff(packages, rownames(installed.packages())))) {
 if (length(setdiff('sf', rownames(installed.packages())))) {
   
   ## install any required packages not present
-  install.packages('sf', repos = 'http://cran.us.r-project.org',
+  install.packages('sf', repos = 'http://cran.us.r-project.org', type = 'source',
                    configure.args = '--with-gdal-config=/usr/local/bin/gdal-config --with-proj-include=/usr/local/include --with-proj-lib=/usr/local/lib --with-geos-config=/usr/local/bin/geos-config')
   
 }
