@@ -3,6 +3,9 @@ tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 
+# security
+cask "cryptomator"
+
 # research software
 #cask "r"
 #cask "rstudio"
