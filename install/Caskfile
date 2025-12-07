@@ -3,24 +3,23 @@ tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 
-# security
+# security and cloud syncing
+cask "dropbox"
 cask "cryptomator"
+cask "macfuse"
 
 # research software
-#cask "r"
-#cask "rstudio"
+cask "positron"
 cask "zotero"
 
 # productivity
-cask "dropbox"
 cask "zoom"
 cask "pdf-expert"
 
 # quality of life
 cask "kitty"
-cask "google-chrome"
 cask "font-source-code-pro"
-cask "stats"
+#cask "stats"
 cask "vlc"
 
 # quick look plugins (https://github.com/sindresorhus/quick-look-plugins)
