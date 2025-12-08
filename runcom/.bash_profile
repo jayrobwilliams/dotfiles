@@ -57,7 +57,7 @@ export DOTFILES_DIR DOTFILES_EXTRA_DIR
  
 # Bash completion
 
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 
 # Add Bash scripts to PATH
 PATH="$PATH:~/Dropbox/Methods/Bash"
@@ -73,14 +73,14 @@ source $HOME/.config/ranger/shell_automatic_cd.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/usr/local/Caskroom/mambaforge/base/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/usr/local/Caskroom/mambaforge/base/etc/profile.d/conda.sh" ]; then
-        . "/usr/local/Caskroom/mambaforge/base/etc/profile.d/conda.sh"
+    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
     else
-        export PATH="/usr/local/Caskroom/mambaforge/base/bin:$PATH"
+        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
     fi
 fi
 unset __conda_setup
