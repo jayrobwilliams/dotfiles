@@ -32,7 +32,7 @@ ifndef GITHUB_ACTION
 	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 endif
 
-packages: brew-packages cask-apps #r-packages
+packages: brew-packages
 
 link: stow-$(OS)
 	for FILE in $$(\ls -A runcom); do if [ -f $(HOME)/$$FILE -a ! -h $(HOME)/$$FILE ]; then \
@@ -72,10 +72,7 @@ git: brew
 
 brew-packages: brew
 	brew bundle --file=$(DOTFILES_DIR)/install/Brewfile || true
-
-cask-apps: brew
-	brew bundle --file=$(DOTFILES_DIR)/install/Caskfile || true
-	xattr -d -r com.apple.quarantine ~/Library/QuickLook
+	xattr -r -d com.apple.quarantine /Applications/QLMarkdown.app
 	conda init
 
 r-packages: brew-packages

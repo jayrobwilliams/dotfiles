@@ -1,4 +1,4 @@
-COMPUTER_NAME="MBP"
+COMPUTER_NAME="MBA"
 
 # set current homebrew bash as login shell
 chsh -s /usr/local/bin/bash

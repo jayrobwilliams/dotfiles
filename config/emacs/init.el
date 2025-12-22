@@ -1,6 +1,9 @@
 ;;; emacs config
 
-;;display column numbers
+;; 14 pt font
+(set-face-attribute 'default nil :height 140)
+
+;; display column numbers
 (column-number-mode)
 
 ;; enable line numbers globally

@@ -1,23 +1,48 @@
-tap "d12frosted/emacs-plus"
+# basics
+cask "firefox"
+cask "vlc"
 
+# terminal basics
 brew "coreutils"
-brew "ranger"
-brew "emacs-plus", args: ["with-memeplex-slim-icon"]
-brew "dockutil"
-brew "r"
-brew "ffmpeg"
 brew "gnu-sed"
 brew "grep"
-brew "imagemagick"
-#brew "pandoc"
-#brew "pandoc-crossref"
 brew "wget"
-#brew "geos"
-#brew "gdal"
-#brew "proj"
-#brew "openblas"
-brew "pkg-config"
 brew "pass"
 brew "smartmontools"
 brew "wireguard-tools"
-brew "tmux-mem-cpu-load"
+cask "kitty"
+
+# security and cloud syncing
+cask "dropbox"
+cask "cryptomator"
+cask "fuse-t"
+
+# fonts
+cask "font-source-code-pro"
+cask "font-noto-sans-symbols-2"
+
+# ranger and file preview support
+brew "ranger"
+brew "pillow"
+brew "poppler"
+brew "imagemagick"
+brew "pandoc"
+
+# editing
+tap "d12frosted/emacs-plus"
+brew "emacs-plus", args: ["with-memeplex-slim-icon"]
+
+# quality of life
+brew "syntax-highlight", args: ["no-quarantine"]
+cask "qlmarkdown"
+brew "dockutil"
+
+# code
+brew "r"
+cask "miniforge"
+cask "positron"
+
+# productivity
+cask "zotero"
+cask "pdf-expert"
+cask "zoom"
